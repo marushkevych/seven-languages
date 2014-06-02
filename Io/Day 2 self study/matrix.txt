@@ -1,0 +1,4 @@
+list(
+list(nil, nil, nil, foo), 
+list(nil, nil, nil, nil), 
+list(nil, nil, nil, bar))

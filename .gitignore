@@ -1,0 +1,10 @@
+/scala/.worksheet/
+/scala/bin/
+
+/scala/.cache
+
+/scala/.classpath
+/scala/.project
+/scala/.settings/
+
+/ruby/.idea/
