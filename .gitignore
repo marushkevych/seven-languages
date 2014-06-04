@@ -8,3 +8,7 @@
 /scala/.settings/
 
 /ruby/.idea/
+
+*.swp
+
+*.beam
