@@ -1,23 +1,33 @@
 -module(day2).
--export([each/2]).
--export([map/2]).
--export([filter/2]).
--export([foldl/3]).
+-export([get/2]).
+-export([getWinner/1]).
 
 
+get(Map, Key) -> 
+	case [V || {K, V} <- Map, K == Key] of
+		[] -> none;
+		[H|_] -> H
+	end.
 
-each(F,[H|T]) -> F(H), each(F,T);
-each(F,[]) -> done.
+	
+	
+%% possible values of the board: x, o or e (empty)
+getWinner(Board) ->
+	case Board of
+		%% rows
+		[P,P,P|_] when (P =/= e) -> P;
+		[_,_,_,P,P,P|_] when (P =/= e) -> P;
+		[_,_,_,_,_,_,P,P,P] when (P =/= e) -> P;
+		
+		%% colums
+		[P,_,_,P,_,_,P,_,_] when (P =/= e) -> P;
+		[_,P,_,_,P,_,_,P,_] when (P =/= e) -> P;
+		[_,_,P,_,_,P,_,_,P] when (P =/= e) -> P;
+		
+		%% diagonals
+		[P,_,_,_,P,_,_,_,P] when (P =/= e) -> P;
+		[P,_,_,_,P,_,_,_,P] when (P =/= e) -> P;
 
-map(F,[H|T]) -> [F(H)| map(F,T)];
-map(F,[]) -> [].
+		_ -> no_winner
+	end.
 
-filter(F, [H|T]) -> 
-  case F(H) of
-    true -> [H| filter(F,T)];
-    false -> filter(F,T)
-  end;
-filter(F,[]) -> [].
-
-foldl(F, Init, [H|T]) -> foldl(F, F(H, Init), T);
-foldl(F, Init, []) -> Init.
