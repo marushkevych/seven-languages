@@ -13,6 +13,11 @@ get(Map, Key) ->
 	
 %% possible values of the board: x, o or e (empty)
 getWinner(Board) ->
+	%% determine if there more moves
+	Res = case [A|| A <- Board, A == e] of
+		[] -> cat;
+		_ -> no_winner
+	end,
 	case Board of
 		%% rows
 		[P,P,P|_] when (P =/= e) -> P;
@@ -26,8 +31,8 @@ getWinner(Board) ->
 		
 		%% diagonals
 		[P,_,_,_,P,_,_,_,P] when (P =/= e) -> P;
-		[P,_,_,_,P,_,_,_,P] when (P =/= e) -> P;
+		[_,_,P,_,P,_,P,_,_] when (P =/= e) -> P;
 
-		_ -> no_winner
+		_ -> Res
 	end.
 
