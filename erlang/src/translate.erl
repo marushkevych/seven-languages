@@ -19,6 +19,5 @@ loop() ->
 translate(Pid, Message) ->
 	Pid ! {self(), Message},
 	receive
-		{Translation} -> Translation
+		Translation -> Translation
 	end.		
-		
